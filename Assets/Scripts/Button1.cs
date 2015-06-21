@@ -3,16 +3,14 @@ using System.Collections;
 
 public class Button1 : MonoBehaviour {
 
-	void Update() {
-		//Debug.Log ("Update");
-		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) {
-			//Debug.Log ("A huevo");
+	public Sprite leftArrow;
+	public Sprite downArrow;
+
+    void OnMouseDown() {
+		if (this.gameObject.GetComponent<SpriteRenderer> ().sprite == leftArrow) {
+			this.gameObject.GetComponent<SpriteRenderer> ().sprite = downArrow;
+		} else {
+			this.gameObject.GetComponent<SpriteRenderer> ().sprite = leftArrow;
 		}
-	}
-
-
-    void OnMouseDown()
-    {
-        Debug.Log("Click On me");
     }
 }
