@@ -4,6 +4,7 @@ using System.Collections;
 public class MoveTrain : MonoBehaviour {
 
 	void Start(){
-		iTween.MoveBy(gameObject, iTween.Hash("x", 2, "easeType", "easeInOutExpo", "loopType", "pingPong", "delay", .1));
+		Debug.Log(iTweenPath.GetPath("TrainPath"));
+		iTween.MoveTo(gameObject, iTween.Hash("path", iTweenPath.GetPath("TrainPath"), "time", 10));
 	}
 }
