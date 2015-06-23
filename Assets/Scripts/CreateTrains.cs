@@ -1,49 +1,84 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.InteropServices;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
+using Random = System.Random;
 
 public class CreateTrains : MonoBehaviour
 {
 
-    private float myTimer = 10.0f;
-    private GameObject blackTrain;
-    private Vector3 blackTrainIPosition;
-    private int blackTrainCounter = 0;
-    private List<GameObject> blackTrains = null;
-    public GameObject prefabBlackTrain;
+    private float _myTimer = 4.0f;
+    private Vector3 _startPosition;
+    public GameObject PrefabBlackTrain;
+    public GameObject PrefabYellowTrain;
+    public GameObject PrefabPinkTrain;
+    public GameObject PrefabGreenTrain;
 
     void Start()
     {
-
-        blackTrainIPosition = new Vector3(1.85f,-1.14f,0);
+        _startPosition = new Vector3(1.85f,-1.14f,0);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (myTimer > 0)
+        if (_myTimer > 0)
         {
-            myTimer -= Time.deltaTime;
+            _myTimer -= Time.deltaTime;
         }
-        if (myTimer <= 0)
+        if (_myTimer <= 0)
         {
-            myTimer = 10.0f;
+            _myTimer = 4.0f;
 
-            GameObject blackT = (GameObject) Instantiate(prefabBlackTrain, blackTrainIPosition, Quaternion.identity);
-            blackT.AddComponent<MoveTrain>();
-       
-            blackT.AddComponent<Rigidbody>();
-            blackT.GetComponent<Rigidbody>().useGravity = false;
-            blackT.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
+            int randomNumber = new Random().Next(1, 5);
 
-            blackT.AddComponent<BoxCollider>();
-            blackT.GetComponent<BoxCollider>().isTrigger = true;
-            blackT.GetComponent<BoxCollider>().size= new Vector3(.44f,.38f,.2f);
-
-
+            switch (randomNumber)
+            {
+                case 1: CreateBlackTrain();
+                    break;
+                case 2: CreateGreenTrain();
+                    break;
+                case 3: CreatePinkTrain();
+                    break;
+                case 4: CreateYellowTrain();
+                    break;
+            }
         }     
+    }
+
+
+    private void CreateBlackTrain()
+    {
+        GameObject blackT = (GameObject)Instantiate(PrefabBlackTrain, _startPosition, Quaternion.identity);
+        AddPhysicsTrain(blackT);
+    }
+
+    private void CreateYellowTrain()
+    {
+        GameObject yellowY = (GameObject)Instantiate(PrefabYellowTrain, _startPosition, Quaternion.identity);
+        AddPhysicsTrain(yellowY);
+    }
+
+    private void CreatePinkTrain()
+    {
+        GameObject pinkT = (GameObject)Instantiate(PrefabPinkTrain, _startPosition, Quaternion.identity);
+        AddPhysicsTrain(pinkT);
+    }
+
+    private void CreateGreenTrain()
+    {
+        GameObject greenT = (GameObject)Instantiate(PrefabGreenTrain, _startPosition, Quaternion.identity);
+        AddPhysicsTrain(greenT);
+    }
+
+    private void AddPhysicsTrain(GameObject train)
+    {
+        train.AddComponent<MoveTrain>();
+        //
+        train.AddComponent<Rigidbody>();
+        train.GetComponent<Rigidbody>().useGravity = false;
+        train.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
+        //
+        train.AddComponent<BoxCollider>();
+        train.GetComponent<BoxCollider>().isTrigger = true;
+        train.GetComponent<BoxCollider>().size = new Vector3(.44f, .38f, .2f);
     }
 }
 

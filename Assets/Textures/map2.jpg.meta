@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0a11132f34e6e80418ea1f4e8f3a7a6e
-timeCreated: 1434935168
+timeCreated: 1435023968
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,6 +9,7 @@ TextureImporter:
     21300004: black_house
     21300006: pink_train
     21300008: pink_house
+    21300010: green_house
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -101,6 +102,16 @@ TextureImporter:
         y: 114
         width: 68
         height: 70
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: green_house
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 179
+        width: 70
+        height: 76
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
