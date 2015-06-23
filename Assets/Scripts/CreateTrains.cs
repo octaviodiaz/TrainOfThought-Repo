@@ -16,6 +16,10 @@ public class CreateTrains : MonoBehaviour
         _startPosition = new Vector3(1.85f,-1.14f,0);
     }
 
+	void OnGUI() {
+		GUI.Label(new Rect(0, 0, 0, 0), "MyText");
+	}
+
     // Update is called once per frame
     private void Update()
     {
@@ -28,9 +32,8 @@ public class CreateTrains : MonoBehaviour
             _myTimer = 4.0f;
 
             int randomNumber = new Random().Next(1, 5);
-
-            switch (randomNumber)
-            {
+			TrainCounter.Instance.totalTrains++;
+            switch (randomNumber) {
                 case 1: CreateBlackTrain();
                     break;
                 case 2: CreateGreenTrain();
