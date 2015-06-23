@@ -1,20 +1,26 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 public class MoveTrain : MonoBehaviour {
-    
+
+    //public GameObject prefabBlackTrain;
+
     private void Start()
     {
+
+        Debug.Log("black train Created");
+
         try
         {
             gameObject.GetComponent<Renderer>().enabled = false;
+            
             iTween.MoveTo(gameObject,
-                iTween.Hash("path", iTweenPath.GetPath("TrainPath"), "time", 10, "easytype", iTween.EaseType.easeOutSine));
+                iTween.Hash("path", iTweenPath.GetPath("TrainPath"), "time", 130, "easytype", iTween.EaseType.easeOutSine));
 
         }
         catch (Exception e)
-        {
-            
+        {            
             Debug.Log(e.Message);
         }
       
@@ -31,11 +37,8 @@ public class MoveTrain : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+        gameObject.GetComponent<Renderer>().enabled = false;
         Destroy(gameObject);
-        //gameObject.GetComponent<Renderer>().enabled = false;
         Debug.Log("black train destroyd");
     }
-    
-
-
 }

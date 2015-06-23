@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using System.Collections;
@@ -11,20 +12,12 @@ public class CreateTrains : MonoBehaviour
     private Vector3 blackTrainIPosition;
     private int blackTrainCounter = 0;
     private List<GameObject> blackTrains = null;
+    public GameObject prefabBlackTrain;
 
     void Start()
     {
-        
-       
-        blackTrain = GameObject.Find("blackTrain");
-        blackTrainIPosition = new Vector3(blackTrain.transform.position.x, blackTrain.transform.position.y, blackTrain.transform.position.z);
-    
-        List<GameObject> blackTrains = new List<GameObject>();
-        for (int i = 0; i < 1000; i++)
-        {
-            blackTrains.Add(GameObject.Find("blackTrain").gameObject);
-        }
 
+        blackTrainIPosition = new Vector3(1.85f,-1.14f,0);
     }
 
     // Update is called once per frame
@@ -37,11 +30,20 @@ public class CreateTrains : MonoBehaviour
         if (myTimer <= 0)
         {
             myTimer = 10.0f;
-            
-            Instantiate(blackTrains[blackTrainCounter++], blackTrainIPosition, Quaternion.identity);
-            Debug.Log("new black train");
-        
-        }
+
+            GameObject blackT = (GameObject) Instantiate(prefabBlackTrain, blackTrainIPosition, Quaternion.identity);
+            blackT.AddComponent<MoveTrain>();
+       
+            blackT.AddComponent<Rigidbody>();
+            blackT.GetComponent<Rigidbody>().useGravity = false;
+            blackT.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
+
+            blackT.AddComponent<BoxCollider>();
+            blackT.GetComponent<BoxCollider>().isTrigger = true;
+            blackT.GetComponent<BoxCollider>().size= new Vector3(.44f,.38f,.2f);
+
+
+        }     
     }
 }
 
